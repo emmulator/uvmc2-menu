@@ -1,0 +1,2508 @@
+{
+"games": [
+{
+"name": "23Matches (BCG)",
+"size": 4683,
+"crc": 2999950612,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": [
+"BCG"
+]
+},
+{
+"name": "3D Crazy Coaster (IL)",
+"size": 8192,
+"crc": 4293966184,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives",
+"3D Imager"
+]
+},
+{
+"name": "3D Crazy Coaster",
+"size": 8192,
+"crc": 2456853265,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"3D Imager",
+"Original"
+]
+},
+{
+"name": "3D MineStorm (IL)",
+"size": 8192,
+"crc": 1350705279,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives",
+"3D Imager",
+"MineStorm"
+]
+},
+{
+"name": "3D MineStorm",
+"size": 8192,
+"crc": 2989569159,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"3D Imager",
+"Original",
+"MineStorm"
+]
+},
+{
+"name": "3D Narrow Escape (IL)",
+"size": 8192,
+"crc": 612322480,
+"flags": 1,
+"developers": [
+"Richard Moszkowski(GCE)"
+],
+"categories": [
+"3D Imager"
+]
+},
+{
+"name": "3D Narrow Escape",
+"size": 8192,
+"crc": 84662601,
+"flags": 1,
+"developers": [
+"Richard Moszkowski(GCE)"
+],
+"categories": [
+"3D Imager",
+"Original"
+]
+},
+{
+"name": "3D Scape Demo Collection",
+"size": 32015,
+"crc": 1531372619,
+"flags": 0,
+"developers": [
+"Revival Studios"
+],
+"categories": [
+"Demos"
+]
+},
+{
+"name": "3D Stars",
+"size": 1091,
+"crc": 4019881139,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Demos"
+]
+},
+{
+"name": "3d vector space cab",
+"size": 15993,
+"crc": 14149430,
+"flags": 0,
+"developers": [
+"Fell DSS"
+],
+"categories": []
+},
+{
+"name": "99 Luftballons",
+"size": 20538,
+"crc": 3820326974,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Acey Ducey (BCG)",
+"size": 7818,
+"crc": 1656555171,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": [
+"BCG"
+]
+},
+{
+"name": "All Good Things",
+"size": 16384,
+"crc": 3918181794,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Amen Live",
+"size": 28851,
+"crc": 848225884,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "AnimAction",
+"size": 8192,
+"crc": 2674057575,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original",
+"Lightpen"
+]
+},
+{
+"name": "Apache",
+"size": 29648,
+"crc": 2767943954,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Arcade Jason",
+"size": 546817,
+"crc": 137751331,
+"flags": 0,
+"developers": [],
+"categories": [
+"Video"
+]
+},
+{
+"name": "Armor Attack",
+"size": 4096,
+"crc": 3075541361,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Art Master",
+"size": 4096,
+"crc": 3370316359,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original",
+"Lightpen"
+]
+},
+{
+"name": "Auld Lang Syne",
+"size": 4141,
+"crc": 4294419185,
+"flags": 0,
+"developers": [],
+"categories": [
+"Music",
+"Xmas"
+]
+},
+{
+"name": "Awari(BCG)",
+"size": 19190,
+"crc": 2162193152,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": [
+"BCG"
+]
+},
+{
+"name": "AY38912",
+"size": 1807,
+"crc": 2026062954,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Tools"
+]
+},
+{
+"name": "BadApple",
+"size": 10094593,
+"crc": 3441221273,
+"flags": 0,
+"developers": [],
+"categories": [
+"Video"
+]
+},
+{
+"name": "BadAppleDE",
+"size": 10097665,
+"crc": 3819530544,
+"flags": 0,
+"developers": [],
+"categories": [
+"Video"
+]
+},
+{
+"name": "Bagels (BCG)",
+"size": 6840,
+"crc": 4071007684,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": [
+"BCG"
+]
+},
+{
+"name": "Bedlam (IL)",
+"size": 4096,
+"crc": 754680832,
+"flags": 0,
+"developers": [
+"Lenny Carlson(GCE)",
+"William Hawkins(GCE)"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Bedlam",
+"size": 4096,
+"crc": 2734318747,
+"flags": 0,
+"developers": [
+"Lenny Carlson(GCE)",
+"William Hawkins(GCE)"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Bedlamalog_v100",
+"size": 4141,
+"crc": 1233591126,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Beluga-Dreams-Free-1.0",
+"size": 10778,
+"crc": 514045876,
+"flags": 0,
+"developers": [],
+"categories": []
+},
+{
+"name": "Berzerk (IL)",
+"size": 4096,
+"crc": 2680588922,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Berzerk (Speed)",
+"size": 4115,
+"crc": 1625891018,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": []
+},
+{
+"name": "Berzerk",
+"size": 4096,
+"crc": 3942523989,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Birds Of Prey (Joystick)",
+"size": 7222,
+"crc": 1688933823,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "BlaBla",
+"size": 7409665,
+"crc": 938146350,
+"flags": 0,
+"developers": [],
+"categories": [
+"Video"
+]
+},
+{
+"name": "Blitz!",
+"size": 8192,
+"crc": 252825100,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "BLUESKYRACER_MagicalSoundShower",
+"size": 9139,
+"crc": 1722361020,
+"flags": 0,
+"developers": [
+"Chris Parsons"
+],
+"categories": []
+},
+{
+"name": "BLUESKYRACER_Splashwave",
+"size": 11207,
+"crc": 559122697,
+"flags": 0,
+"developers": [
+"Chris Parsons"
+],
+"categories": []
+},
+{
+"name": "C19 MusicBox",
+"size": 9300,
+"crc": 3513856622,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Call Me",
+"size": 18604,
+"crc": 3937640378,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Cantina Band",
+"size": 4776,
+"crc": 1561236892,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Carol Singer",
+"size": 26866,
+"crc": 3034593519,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music",
+"Xmas"
+]
+},
+{
+"name": "catch_your_parcels",
+"size": 3590,
+"crc": 2100188588,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "cave_racer",
+"size": 23095,
+"crc": 1370804295,
+"flags": 0,
+"developers": [
+"Pere Johannson"
+],
+"categories": []
+},
+{
+"name": "Chimney Hunt 64",
+"size": 65536,
+"crc": 798422711,
+"flags": 0,
+"developers": [
+"James Watt"
+],
+"categories": [
+"Xmas"
+]
+},
+{
+"name": "Clean Sweep (IL)",
+"size": 4096,
+"crc": 2280960162,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Clean Sweep",
+"size": 4096,
+"crc": 4054965880,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Climax Slideshow",
+"size": 31233,
+"crc": 2921660697,
+"flags": 0,
+"developers": [
+"Revival Studios"
+],
+"categories": [
+"Demos"
+]
+},
+{
+"name": "Continuum",
+"size": 18755,
+"crc": 100062972,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "Cosmic Chasm (IL)",
+"size": 4096,
+"crc": 2917887879,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Cosmic Chasm (Spinner)",
+"size": 4197,
+"crc": 1180718890,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"Spinner"
+]
+},
+{
+"name": "Cosmic Chasm",
+"size": 4096,
+"crc": 1813707346,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "CosmicDriveThru_v0_2",
+"size": 4207,
+"crc": 939081791,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Count_Vecula",
+"size": 31091,
+"crc": 421069482,
+"flags": 0,
+"developers": [
+"Pere Johannson"
+],
+"categories": []
+},
+{
+"name": "Crossfire",
+"size": 10462,
+"crc": 990058976,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Cylon_Attack-v2",
+"size": 7316,
+"crc": 142804521,
+"flags": 0,
+"developers": [],
+"categories": []
+},
+{
+"name": "Dark Tower",
+"size": 12288,
+"crc": 2647643575,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": []
+},
+{
+"name": "DarkTower (IL)",
+"size": 12288,
+"crc": 3847269489,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "doodle jump",
+"size": 5428,
+"crc": 243142812,
+"flags": 0,
+"developers": [],
+"categories": []
+},
+{
+"name": "Doodle LP",
+"size": 1922,
+"crc": 941340645,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Doodle",
+"size": 1619,
+"crc": 3063784723,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Dots",
+"size": 4928,
+"crc": 2856430067,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Draft4-newyear",
+"size": 10671,
+"crc": 3602021792,
+"flags": 0,
+"developers": [
+"Ken Chrisholm"
+],
+"categories": []
+},
+{
+"name": "Draft4",
+"size": 10660,
+"crc": 719562286,
+"flags": 0,
+"developers": [
+"Graham Toal"
+],
+"categories": []
+},
+{
+"name": "Drum",
+"size": 20351,
+"crc": 254314295,
+"flags": 0,
+"developers": [],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Engine Analyzer",
+"size": 4096,
+"crc": 4271525914,
+"flags": 0,
+"developers": [],
+"categories": []
+},
+{
+"name": "Every Day is Halloween",
+"size": 32768,
+"crc": 879460506,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "floor is lava",
+"size": 12027,
+"crc": 488502465,
+"flags": 0,
+"developers": [],
+"categories": []
+},
+{
+"name": "Fortress of Narzod (IL)",
+"size": 8192,
+"crc": 4004794147,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Fortress of Narzod",
+"size": 8192,
+"crc": 329473162,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "FrogsNFlies",
+"size": 13120,
+"crc": 2990992023,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "FunkyDrummer_v100",
+"size": 31834,
+"crc": 2396701637,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "get into vectrex",
+"size": 29891,
+"crc": 3601050297,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "GhostbustersII Music",
+"size": 7234,
+"crc": 4129711089,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Glider Rider Music",
+"size": 9728,
+"crc": 2609352433,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Gravitrex",
+"size": 32768,
+"crc": 2209375378,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "GWSL",
+"size": 32768,
+"crc": 3664801698,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Handy Pick Hank!",
+"size": 8621,
+"crc": 1000158247,
+"flags": 0,
+"developers": [
+"John Reder"
+],
+"categories": []
+},
+{
+"name": "Heads Up",
+"size": 8192,
+"crc": 3860495843,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Hex",
+"size": 13256,
+"crc": 1903925146,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "hexed",
+"size": 12140,
+"crc": 2358671473,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "Hyperchase",
+"size": 4096,
+"crc": 1269904498,
+"flags": 0,
+"developers": [
+"Jeff Corsiglia(GCE)",
+"Chris King(GCE)"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Jingle Bell Hero",
+"size": 29178,
+"crc": 227555581,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Joystick Test",
+"size": 550,
+"crc": 417904690,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Tools"
+]
+},
+{
+"name": "KarlQuappe",
+"size": 32768,
+"crc": 1666465937,
+"flags": 0,
+"developers": [
+"Malban"
+],
+"categories": []
+},
+{
+"name": "knightex",
+"size": 23633,
+"crc": 3727750504,
+"flags": 0,
+"developers": [
+"Alexander von Knorring"
+],
+"categories": []
+},
+{
+"name": "LaLinea",
+"size": 5449729,
+"crc": 2728789351,
+"flags": 0,
+"developers": [],
+"categories": [
+"Video"
+]
+},
+{
+"name": "LCDTopGun",
+"size": 24982,
+"crc": 4115093336,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": []
+},
+{
+"name": "LightPen Test",
+"size": 945,
+"crc": 1495342375,
+"flags": 1,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Lightpen",
+"Tools"
+]
+},
+{
+"name": "Lord Of Robots",
+"size": 12955,
+"crc": 3910753142,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "Mail Plane",
+"size": 8192,
+"crc": 3659186395,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"Lightpen"
+]
+},
+{
+"name": "marinefox",
+"size": 6345,
+"crc": 2602613310,
+"flags": 0,
+"developers": [
+"Mountain Goat"
+],
+"categories": []
+},
+{
+"name": "MegaApocalypse",
+"size": 9342,
+"crc": 2217592749,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Melody Master",
+"size": 8192,
+"crc": 2951717532,
+"flags": 1,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original",
+"Music",
+"Lightpen"
+]
+},
+{
+"name": "Mine Storm 1 (Level Select)",
+"size": 4153,
+"crc": 4033135565,
+"flags": 0,
+"developers": [
+"Brett Walach",
+"John Hall(GCE)"
+],
+"categories": [
+"MineStorm"
+]
+},
+{
+"name": "Mine Storm 1",
+"size": 4096,
+"crc": 1833997670,
+"flags": 0,
+"developers": [
+"John Hall(GCE)"
+],
+"categories": [
+"MineStorm"
+]
+},
+{
+"name": "Mine Storm 2",
+"size": 4096,
+"crc": 1922715216,
+"flags": 0,
+"developers": [
+"John Hall(GCE)"
+],
+"categories": [
+"MineStorm"
+]
+},
+{
+"name": "Mine-o-tron_v101",
+"size": 4392,
+"crc": 4216864893,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "MinerWilly_v100",
+"size": 2477,
+"crc": 55886098,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "MineStorm 2 (Buttons)",
+"size": 4377,
+"crc": 3998501696,
+"flags": 0,
+"developers": [
+"John Hall(GCE)"
+],
+"categories": [
+"MineStorm"
+]
+},
+{
+"name": "MineStorm 2 (IL)",
+"size": 4096,
+"crc": 3705490196,
+"flags": 0,
+"developers": [
+"John Hall(GCE)"
+],
+"categories": [
+"Infinite Lives",
+"MineStorm"
+]
+},
+{
+"name": "MineStorm 2 (Invincibility)",
+"size": 4096,
+"crc": 2585036763,
+"flags": 0,
+"developers": [
+"John Hall(GCE)"
+],
+"categories": [
+"MineStorm"
+]
+},
+{
+"name": "minex",
+"size": 30335,
+"crc": 1902805685,
+"flags": 0,
+"developers": [
+"Alexander von Knorring"
+],
+"categories": []
+},
+{
+"name": "Monty OTR Music",
+"size": 6454,
+"crc": 2195590159,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "MoonLander",
+"size": 32768,
+"crc": 2249704196,
+"flags": 0,
+"developers": [
+"Clay Cowgill"
+],
+"categories": []
+},
+{
+"name": "morse",
+"size": 2393,
+"crc": 1074472217,
+"flags": 0,
+"developers": [
+"Graham Toal"
+],
+"categories": []
+},
+{
+"name": "Mr. Boston",
+"size": 8225,
+"crc": 4065793307,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Nagoya Attack beta",
+"size": 8380,
+"crc": 513930413,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Narrow Escape (2D)",
+"size": 7573,
+"crc": 517613644,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Omega Chase",
+"size": 16913,
+"crc": 2605516096,
+"flags": 0,
+"developers": [
+"Christopher Tumber"
+],
+"categories": []
+},
+{
+"name": "OregonTrail (1978)",
+"size": 17046,
+"crc": 1464330753,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": []
+},
+{
+"name": "Overseer",
+"size": 5610,
+"crc": 945175556,
+"flags": 0,
+"developers": [
+"ZAHMUL"
+],
+"categories": []
+},
+{
+"name": "Patriots Remix",
+"size": 10761,
+"crc": 513680035,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Patriots",
+"size": 18540,
+"crc": 1622633719,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Patriots3",
+"size": 16905,
+"crc": 1787844558,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "PegSolitaire",
+"size": 897,
+"crc": 1985047396,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": []
+},
+{
+"name": "Performancevx",
+"size": 9323,
+"crc": 1733702119,
+"flags": 0,
+"developers": [
+"Revival Studios"
+],
+"categories": [
+"Demos"
+]
+},
+{
+"name": "PitchersDuel",
+"size": 8192,
+"crc": 3261017614,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Polar Rescue",
+"size": 8192,
+"crc": 2806454148,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "POLAR32",
+"size": 32768,
+"crc": 2601779689,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Pole Position",
+"size": 8192,
+"crc": 3239000024,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "presentdrop",
+"size": 3191,
+"crc": 4105966403,
+"flags": 0,
+"developers": [
+"Chris Parsons"
+],
+"categories": []
+},
+{
+"name": "Pythagorian Theorem",
+"size": 1987,
+"crc": 3229620041,
+"flags": 0,
+"developers": [
+"Rob Mitchell"
+],
+"categories": []
+},
+{
+"name": "Quartz's_Quest_Free_1.2",
+"size": 23741,
+"crc": 3449624099,
+"flags": 0,
+"developers": [
+"Denebola Interactive"
+],
+"categories": []
+},
+{
+"name": "Quest-o-tron_v100",
+"size": 4388,
+"crc": 1225092241,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Quick Shot",
+"size": 3816,
+"crc": 3411756882,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Raid Over Vectrexia!",
+"size": 30032,
+"crc": 2707864323,
+"flags": 0,
+"developers": [
+"John Reder"
+],
+"categories": []
+},
+{
+"name": "RaidingParty",
+"size": 31927,
+"crc": 3134637669,
+"flags": 0,
+"developers": [
+"RiFT"
+],
+"categories": [
+"Demos"
+]
+},
+{
+"name": "RAM Test",
+"size": 431,
+"crc": 900281717,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Tools"
+]
+},
+{
+"name": "Release",
+"size": 32768,
+"crc": 475630919,
+"flags": 0,
+"developers": [
+"Malban"
+],
+"categories": []
+},
+{
+"name": "Repulse",
+"size": 6073,
+"crc": 1280120710,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Rip Off",
+"size": 4096,
+"crc": 883523890,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": []
+},
+{
+"name": "Robocop Music",
+"size": 12292,
+"crc": 3277979100,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Rockaroids",
+"size": 4096,
+"crc": 3521128079,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "RockaroidsRemix (Spinner)",
+"size": 4211,
+"crc": 2082521199,
+"flags": 1,
+"developers": [
+"John Donzilla"
+],
+"categories": [
+"Spinner"
+]
+},
+{
+"name": "rotor",
+"size": 15197,
+"crc": 631907105,
+"flags": 0,
+"developers": [
+"Peer Johannsen"
+],
+"categories": []
+},
+{
+"name": "Royal21",
+"size": 11797,
+"crc": 35100379,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "Say It Loud",
+"size": 31406,
+"crc": 221470084,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Scramble (IL)",
+"size": 4096,
+"crc": 1132242611,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Scramble",
+"size": 4096,
+"crc": 1887211518,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Sectis",
+"size": 32309,
+"crc": 714813413,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "Skull Shot",
+"size": 17428,
+"crc": 4042432232,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "SmashTV Music",
+"size": 8187,
+"crc": 2350973945,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Snowball_standard",
+"size": 9540,
+"crc": 663655221,
+"flags": 0,
+"developers": [
+"Chris Parsons"
+],
+"categories": []
+},
+{
+"name": "Solar Quest (Buttons)",
+"size": 4230,
+"crc": 345612076,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": []
+},
+{
+"name": "Solar Quest (IL)",
+"size": 4096,
+"crc": 2587663336,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Solar Quest",
+"size": 4096,
+"crc": 1548095944,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Space Force!",
+"size": 2215,
+"crc": 4213906007,
+"flags": 0,
+"developers": [
+"John Reder"
+],
+"categories": []
+},
+{
+"name": "Space Frenzy (Spinner)",
+"size": 27238,
+"crc": 1523076863,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Space Race",
+"size": 6126,
+"crc": 1774055711,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Space Wars",
+"size": 4096,
+"crc": 2747161343,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Spectrum Color Test",
+"size": 32768,
+"crc": 548372287,
+"flags": 0,
+"developers": [],
+"categories": []
+},
+{
+"name": "spidex",
+"size": 32503,
+"crc": 3200792035,
+"flags": 0,
+"developers": [
+"Alexander von Knorring"
+],
+"categories": []
+},
+{
+"name": "Spike (IL)",
+"size": 8192,
+"crc": 36720873,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Spike Balloons",
+"size": 2980,
+"crc": 2501414758,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Spike Hoppin",
+"size": 16384,
+"crc": 476775182,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "spike_g_squished_v095",
+"size": 22591,
+"crc": 3037259552,
+"flags": 0,
+"developers": [
+"Brett Walach"
+],
+"categories": []
+},
+{
+"name": "Spike",
+"size": 8192,
+"crc": 1655052355,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Spinball (IB)",
+"size": 8192,
+"crc": 3988926529,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Spinball",
+"size": 8192,
+"crc": 49551155,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Spinner Test",
+"size": 803,
+"crc": 1976961918,
+"flags": 1,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Tools",
+"Spinner"
+]
+},
+{
+"name": "Spud",
+"size": 2514,
+"crc": 661400330,
+"flags": 0,
+"developers": [
+"Gauze Soft"
+],
+"categories": []
+},
+{
+"name": "Star Castle (IL)",
+"size": 4096,
+"crc": 522847927,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Star Castle",
+"size": 4096,
+"crc": 3372455459,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Star Fire Spirits",
+"size": 8516,
+"crc": 1109191208,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Star Hawk",
+"size": 4096,
+"crc": 1306652779,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Star Seige",
+"size": 7326,
+"crc": 214737968,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Star Trek (IL)",
+"size": 4096,
+"crc": 4078766089,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Star Trek",
+"size": 4096,
+"crc": 929618115,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "stevedore",
+"size": 31777,
+"crc": 2467341094,
+"flags": 0,
+"developers": [
+"Graham Toal"
+],
+"categories": []
+},
+{
+"name": "Super Simon",
+"size": 3316,
+"crc": 3355349938,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Tank",
+"size": 6936577,
+"crc": 1987052620,
+"flags": 0,
+"developers": [],
+"categories": [
+"Video"
+]
+},
+{
+"name": "Telengard",
+"size": 196608,
+"crc": 1625721860,
+"flags": 0,
+"developers": [
+"Malban"
+],
+"categories": []
+},
+{
+"name": "Test Cart v4",
+"size": 4096,
+"crc": 1922557973,
+"flags": 0,
+"developers": [],
+"categories": [
+"Tools"
+]
+},
+{
+"name": "The Dice",
+"size": 2002,
+"crc": 2593626366,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": []
+},
+{
+"name": "The_900_Number_v101",
+"size": 31767,
+"crc": 4142470962,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "The_Count",
+"size": 28518,
+"crc": 1343805122,
+"flags": 0,
+"developers": [
+"Pere Johannson"
+],
+"categories": []
+},
+{
+"name": "Think_v100",
+"size": 32716,
+"crc": 236060276,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Thrust (Spinner)",
+"size": 32768,
+"crc": 1831964866,
+"flags": 0,
+"developers": [
+"Ville Krumlinde"
+],
+"categories": [
+"Spinner"
+]
+},
+{
+"name": "TouchMe",
+"size": 850,
+"crc": 2518839483,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": []
+},
+{
+"name": "Tour de France",
+"size": 8192,
+"crc": 3142029809,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": []
+},
+{
+"name": "Tower (BCG)",
+"size": 4849,
+"crc": 2143861121,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": [
+"BCG"
+]
+},
+{
+"name": "Turkey Pop",
+"size": 8912,
+"crc": 359910004,
+"flags": 0,
+"developers": [
+"Brett Walach"
+],
+"categories": []
+},
+{
+"name": "turkey_runner_v090",
+"size": 29693,
+"crc": 393098194,
+"flags": 0,
+"developers": [
+"Brett Walach"
+],
+"categories": []
+},
+{
+"name": "turkeyhero_v097",
+"size": 27356,
+"crc": 2558714261,
+"flags": 0,
+"developers": [
+"Brett Walach"
+],
+"categories": []
+},
+{
+"name": "turkeypopv09",
+"size": 8912,
+"crc": 359910004,
+"flags": 0,
+"developers": [
+"Brett Walach"
+],
+"categories": []
+},
+{
+"name": "unblockme",
+"size": 8511,
+"crc": 2881458137,
+"flags": 0,
+"developers": [
+"Graham Toal"
+],
+"categories": []
+},
+{
+"name": "upsidedown",
+"size": 131,
+"crc": 2824984097,
+"flags": 0,
+"developers": [],
+"categories": []
+},
+{
+"name": "v-alpha4",
+"size": 6349,
+"crc": 837154416,
+"flags": 0,
+"developers": [
+"Graham Toal"
+],
+"categories": []
+},
+{
+"name": "V-Frogger",
+"size": 16384,
+"crc": 2643926760,
+"flags": 0,
+"developers": [
+"Malban"
+],
+"categories": []
+},
+{
+"name": "V-THEREMIN",
+"size": 1346,
+"crc": 3495495766,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Vec-Man",
+"size": 28149,
+"crc": 3713842114,
+"flags": 0,
+"developers": [
+"Peer Johannsen"
+],
+"categories": []
+},
+{
+"name": "VecAkalabeth_II",
+"size": 29627,
+"crc": 531905797,
+"flags": 0,
+"developers": [
+"Malban"
+],
+"categories": []
+},
+{
+"name": "Veccy Bird",
+"size": 5649,
+"crc": 4073119811,
+"flags": 0,
+"developers": [
+"Michael Simonds"
+],
+"categories": []
+},
+{
+"name": "veccy_pong_v092",
+"size": 20631,
+"crc": 1804344476,
+"flags": 0,
+"developers": [
+"Brett Walach"
+],
+"categories": []
+},
+{
+"name": "VecDrum",
+"size": 6690,
+"crc": 493587135,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Vecmania-1",
+"size": 32768,
+"crc": 1428867872,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Vecmania-2",
+"size": 32768,
+"crc": 2239371535,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "vecribbon-demo",
+"size": 13180,
+"crc": 1996290857,
+"flags": 0,
+"developers": [
+"Shattered Screens"
+],
+"categories": []
+},
+{
+"name": "VecTalk",
+"size": 3846,
+"crc": 18048846,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Vectopia",
+"size": 32768,
+"crc": 2478069466,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Vector Pong",
+"size": 10968,
+"crc": 3145292474,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "Vector21",
+"size": 12289,
+"crc": 2638713419,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "VectorbladeV1.13",
+"size": 196608,
+"crc": 2917538838,
+"flags": 0,
+"developers": [
+"Malban"
+],
+"categories": []
+},
+{
+"name": "VectorClock",
+"size": 2368,
+"crc": 2485862709,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "VectorVaders",
+"size": 8058,
+"crc": 2345731009,
+"flags": 0,
+"developers": [
+"John Donzilla"
+],
+"categories": []
+},
+{
+"name": "Vectrex UFO!",
+"size": 6132,
+"crc": 3670666714,
+"flags": 0,
+"developers": [
+"John Reder"
+],
+"categories": []
+},
+{
+"name": "vectrexagon_v12",
+"size": 24685,
+"crc": 3167281499,
+"flags": 0,
+"developers": [
+"Andreas Gustafsson"
+],
+"categories": []
+},
+{
+"name": "Ventilator",
+"size": 199,
+"crc": 2327619146,
+"flags": 0,
+"developers": [
+"Ralf Kornmann"
+],
+"categories": []
+},
+{
+"name": "Vextrument_v100",
+"size": 3536,
+"crc": 798753114,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "volvo",
+"size": 4597,
+"crc": 1853017582,
+"flags": 0,
+"developers": [
+"Graham Toal"
+],
+"categories": []
+},
+{
+"name": "WAM",
+"size": 10972,
+"crc": 932126906,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "wangle02a",
+"size": 23912,
+"crc": 1465611003,
+"flags": 0,
+"developers": [
+"Graham Toal"
+],
+"categories": []
+},
+{
+"name": "War of the Robots",
+"size": 20920,
+"crc": 1469693918,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "warrior",
+"size": 32559,
+"crc": 2085825330,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "Web Wars (IL)",
+"size": 8192,
+"crc": 228509293,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Infinite Lives"
+]
+},
+{
+"name": "Web Wars",
+"size": 8192,
+"crc": 786563331,
+"flags": 0,
+"developers": [
+"GCE"
+],
+"categories": [
+"Original"
+]
+},
+{
+"name": "Wormhole (Spinner)",
+"size": 29640,
+"crc": 575387998,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": [
+"Spinner"
+]
+},
+{
+"name": "wwry",
+"size": 2501,
+"crc": 4035994225,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Music"
+]
+},
+{
+"name": "Xandoz",
+"size": 11687,
+"crc": 1685898165,
+"flags": 0,
+"developers": [
+"Graham Toal"
+],
+"categories": []
+},
+{
+"name": "Xmas Space Race",
+"size": 6686,
+"crc": 1661482695,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Xmas"
+]
+},
+{
+"name": "XmasCart 2014",
+"size": 30121,
+"crc": 1821801280,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Xmas"
+]
+},
+{
+"name": "XmasCart 2015",
+"size": 31498,
+"crc": 3375505045,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": [
+"Xmas"
+]
+},
+{
+"name": "Zantis",
+"size": 7089,
+"crc": 2674016077,
+"flags": 0,
+"developers": [
+"Fury Unlimited"
+],
+"categories": []
+},
+{
+"name": "ZOAXMAS",
+"size": 871,
+"crc": 118069411,
+"flags": 0,
+"developers": [
+"Vectorzoa"
+],
+"categories": [
+"Xmas"
+]
+},
+{
+"name": "Zodiac",
+"size": 1861,
+"crc": 3671830036,
+"flags": 0,
+"developers": [
+"Chris Binarystar"
+],
+"categories": []
+},
+{
+"name": "ZSB",
+"size": 32498,
+"crc": 1043796993,
+"flags": 0,
+"developers": [
+"Ville Krumlinde"
+],
+"categories": []
+}
+],
+"developers": [
+"Ralf Kornmann",
+"GCE",
+"Richard Moszkowski(GCE)",
+"Revival Studios",
+"Chris Binarystar",
+"Fell DSS",
+"John Donzilla",
+"Lenny Carlson(GCE)",
+"William Hawkins(GCE)",
+"Fury Unlimited",
+"Graham Toal",
+"John Reder",
+"Jeff Corsiglia(GCE)",
+"Chris King(GCE)",
+"Malban",
+"Alexander von Knorring",
+"Mountain Goat",
+"Brett Walach",
+"John Hall(GCE)",
+"Clay Cowgill",
+"Christopher Tumber",
+"ZAHMUL",
+"RiFT",
+"Peer Johannsen",
+"Gauze Soft",
+"Ville Krumlinde",
+"Michael Simonds",
+"Shattered Screens",
+"Vectorzoa",
+"Rob Mitchell",
+"James Watt",
+"Andreas Gustafsson",
+"Chris Parsons",
+"Denebola Interactive",
+"Ken Chrisholm",
+"Pere Johannson"
+],
+"categories": [
+"BCG",
+"Infinite Lives",
+"3D Imager",
+"Original",
+"MineStorm",
+"Demos",
+"Music",
+"Lightpen",
+"Xmas",
+"Tools",
+"Spinner",
+"Video"
+]
+}

@@ -1,0 +1,6 @@
+[submodule "third_party/uvmc2-sdk"]
+	path = third_party/uvmc2-sdk
+	url = https://github.com/tullulah/uvmc2-sdk.git
+[submodule "third_party/pico-sdk"]
+	path = third_party/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk.git

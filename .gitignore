@@ -1,0 +1,9 @@
+/build_uvm2/
+/build_transfer/
+/build_host/
+/.idea/
+/local.mk
+.claude/
+/dist/
+__pycache__/
+*.pyc

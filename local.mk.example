@@ -1,0 +1,7 @@
+# Copy to local.mk (not committed) when the tools are not on your PATH; make reads it by itself.
+# These are the author's paths: the Arm GNU Toolchain and Rust installed under ~/.local/opt.
+ARM_GNU   := $(HOME)/.local/opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin
+RUST_OPT  := $(HOME)/.local/opt/rust
+export PATH        := $(ARM_GNU):$(RUST_OPT)/cargo/bin:$(PATH)
+export RUSTUP_HOME := $(RUST_OPT)/rustup
+export CARGO_HOME  := $(RUST_OPT)/cargo
