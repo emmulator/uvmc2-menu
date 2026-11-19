@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1
+
+- README reorganised and corrected: every built-in game is listed (not only some sizes), the `folder = @fw` rule's `also`
+  applies to every built-in, how to come back from `.um2` and `.bin` games, a clearer "Putting your games in the menu",
+  developer details moved to "How it works", photos of the menu and a link to a demonstration video.
+- `menu.default.ini` and `examples/menu.ini`: comments say "folder rule" and "does not categorize" throughout.
+- The release archive holds only what a user needs: the card files, documents, examples, the README's photos and the two
+  tools that run with plain Python 3 (`gen_card_ini.py`, `hs_dump.py`) with the catalogue they read.
+
 ## 1.0.0 (first release, tested on firmware 1.1.13a)
 
 - A card-driven menu in place of the firmware's, started through the firmware's `autostart.um2` hook. Layered `.ini` files in

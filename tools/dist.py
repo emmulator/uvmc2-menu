@@ -2,7 +2,8 @@
 """Makes the release archive: dist.py VERSION menu.um2 transfer.um2 OUTDIR  ->  OUTDIR/uvmc2-menu-VERSION.zip
 
 Inside, under uvmc2-menu-VERSION/: card/ is what goes on the SD card (autostart.um2, MENU.um2, menu/menu.default.ini,
-menu/transfer.um2), copied to the card's root; beside it the README, licence, notices, changelog, examples, tools and the catalogue the tools read.
+menu/transfer.um2), copied to the card's root; beside it the README, licence, notices, changelog, examples, the
+README's photos, and the two user tools (gen_card_ini.py, hs_dump.py) with the catalogue they read.
 Stops if CHANGELOG.md has no heading for VERSION, so a release cannot go out without its notes."""
 import os, re, sys, zipfile
 
@@ -18,15 +19,14 @@ files = [
     (menu, 'card/autostart.um2'), (menu, 'card/MENU.um2'),
     (src('card/menu/menu.default.ini'), 'card/menu/menu.default.ini'), (transfer, 'card/menu/transfer.um2'),
 ]
-for f in ('README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'CHANGELOG.md', 'VERSION'):
+# What a user needs: the documents, the examples, the two photos the README shows, and the two tools that run with plain
+# Python 3 (with the catalogue they read). The developer tools and notes stay in the source repository.
+for f in ('README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'CHANGELOG.md',
+          'docs/default-menu.jpg', 'docs/customized-menu.jpg',
+          'tools/gen_card_ini.py', 'tools/hs_dump.py', 'data/firmware-catalog-1.1.13a.json'):
     files.append((src(f), f))
-for d in ('examples', 'docs', 'tools', 'data'):
-    for dp, dn, fn in os.walk(src(d)):
-        dn[:] = [x for x in dn if x not in ('__pycache__',)]
-        for f in sorted(fn):
-            if f.endswith('.pyc'): continue
-            p = os.path.join(dp, f)
-            files.append((p, os.path.relpath(p, root)))
+for f in sorted(os.listdir(src('examples'))):
+    files.append((src('examples/' + f), 'examples/' + f))
 os.makedirs(outdir, exist_ok=True)
 out = os.path.join(outdir, top + '.zip')
 with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:
