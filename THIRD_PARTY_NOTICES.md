@@ -55,15 +55,15 @@ None of these is shipped, and what they make is not covered by their licences.
 
 ## Whose work this rests on
 
-- **The firmware** of the Ultimate Vectrex Multicart 2 is Ralf Kornmann's ("Arcade Jason"). This menu replaces the
+- **The cartridge and its firmware.** The Ultimate Vectrex Multicart 2 hardware is Jason Kopp's ("Arcade Jason"); its
+  firmware is written by Ralf Kornmann. This menu replaces the
   firmware's own menu, but runs on top of the firmware: it starts through the firmware's `autostart.um2` hook, and uses the
   firmware's high-score table, game list, video player and game-launching rules. **None of the firmware is in this
   repository or in a release**: the menu finds what it needs in the cartridge's own flash at run time. What the repo
   holds from it is facts derived by reading firmware 1.1.13a: `data/firmware-catalog-1.1.13a.json` (the 226 built-in
   games' names, sizes, CRC-32s, developers and categories), the numbers and layouts in `docs/bankswitch.md`, and code that
-  does what the firmware's loops do. The title screen credits him. The firmware's own terms were not checked.
-- **The hardware, and `uvmc2-sdk`:** Dani Ferrer (tullulah), as above. The `.um2` format, the SD and bus drivers and
-  the drawing layer are his.
+  does what the firmware's loops do. The title screen credits the firmware's author. The terms of the hardware and the firmware were not checked.
+- **`uvmc2-sdk`:** Dani Ferrer (tullulah), as above. The `.um2` format, the SD and bus drivers and the drawing layer are his.
 - **The menu's file format and parser** (`src/pitrex/`) are from the PiTrex menu, which is this author's own work in a
   fork of Malban's `pitrex-baremetal` (`emmulator/pitrex-baremetal`, branch `menu-redesign`; the commit is in
   `src/pitrex/SOURCE_COMMIT`). They were written for that fork, and are the same author's. Malban's own sources in

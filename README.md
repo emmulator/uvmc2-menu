@@ -12,10 +12,10 @@ folders they are in and the notes under them come from plain-text `.ini` files o
 building anything. It also lists the cartridge's built-in games, keeps your favorites, browses the card, and keeps high
 scores and saves in step with the firmware.
 
-Tested on firmware **1.1.13a**. It needs no firmware change: the firmware looks for `autostart.um2` on the card at power-on
-and runs it instead of its own menu. The only part of the cartridge's flash the menu writes is the firmware's own
-high-score table (the same records the firmware keeps); the firmware itself is never touched, so the menu cannot brick the
-cartridge, and renaming `autostart.um2` on a PC puts the stock menu back.
+It needs firmware **1.1.12a or later**, the first version that looks for `autostart.um2` on the card at power-on and runs it
+instead of its own menu. It has been tested only on **1.1.13a**. It needs no firmware change: the only part of the cartridge's flash the menu
+writes is the firmware's own high-score table (the same records the firmware keeps), and the firmware itself is never
+touched, so the menu cannot brick the cartridge. Renaming `autostart.um2` on a PC puts the stock menu back.
 
 Contents: [Demonstration](#demonstration) · [Install](#install) · [First start on a new card](#first-start-on-a-new-card) ·
 [Using the menu](#using-the-menu) · [Making the menu yours](#making-the-menu-yours) · [BROWSE SD CARD](#browse-sd-card) ·
@@ -28,7 +28,7 @@ Contents: [Demonstration](#demonstration) · [Install](#install) · [First start
 
 ## Install
 
-You need a UVMC2 on firmware 1.1.13a and an SD card (FAT32 or exFAT) that the cartridge already works with. From a release
+You need a UVMC2 on firmware 1.1.12a or later (tested on 1.1.13a only) and an SD card (FAT32 or exFAT) that the cartridge already works with. From a release
 archive (`uvmc2-menu-<version>.zip`), copy the contents of its `card/` folder to the root of the card. That puts these files
 on it:
 
@@ -55,9 +55,9 @@ of yours in `menu/` (your `.ini` files, `favorites.ini`, `settings.ini`) and `co
 
 A card with only the files above has no `menu/menu.ini`, no favorites and no calibration. This is what you see:
 
-1. **Title screen**, for 4 seconds or until any button: ARCADE JASON / ULTIMATE / VECTREX / MULTICART 2 and the firmware's
-   version (read from the cartridge), with the credits under them: *Firmware, Ralf Kornmann* and *Custom Menu* with this
-   menu's version, *John Emmer*. It shows once per power-on, not each time you come back from a game.
+1. **Title screen**, for 4 seconds or until any button: the cartridge's own title (ARCADE JASON / ULTIMATE / VECTREX /
+   MULTICART 2) and the firmware's version (read from the cartridge), with the credits under them: *Firmware, Ralf
+   Kornmann* and *Custom Menu* with this menu's version, *John Emmer*. It shows once per power-on, not each time you come back from a game.
 2. **The top level.** The menu lists the cartridge's built-in games, found in the cartridge's flash, in the same folders
    the firmware's own menu uses, and puts any that the firmware does not categorize in HOMEBREW. On firmware 1.1.13a, a
    fresh card shows these 15 entries (the menu draws them in capitals), sorted by title with SYSTEM last:
@@ -357,7 +357,10 @@ game's save, which the firmware keeps in its own flash, is not kept by this menu
 - About 250 favorites: the menu keeps their paths in 8 KB of memory, and the file may be up to 16 KB; the menu says
   FAVORITES FILE TOO BIG when it is full.
 - A built-in flash game's save is not kept.
-- The firmware's behaviour was read from firmware 1.1.13a; the game-list scan is tested on 1.1.9a to 1.1.13a.
+- Firmware 1.1.12a is the oldest the menu can start on, because it is the first with `autostart.um2` (the file names are in
+  its image; its code was not traced). Everything else the menu does with the firmware (its game list, high-score table,
+  video player and launching rules) was read from 1.1.13a, and only that version has been tested on a console. The
+  game-list scan also reads 1.1.9a to 1.1.13a.
 - With USB connected the cartridge keeps running when the console is switched off; unplug USB to test a power cycle.
 
 ## How it works
@@ -497,7 +500,8 @@ sheet of it.
 This project is under the **GNU General Public License, version 3** (`LICENSE`). Copyright 2026 John Emmer. The source code
 of every release is at <https://github.com/emmulator/uvmc2-menu>, tagged with its version.
 
-It is built on Ralf Kornmann's UVMC2 firmware (not included: the menu reads what it needs from the cartridge), on Dani
-Ferrer's ([tullulah](https://github.com/tullulah)) UVMC2 SDK, used as a submodule, and on FatFs (ChaN), the Raspberry Pi
-pico-sdk and TinyUSB. `THIRD_PARTY_NOTICES.md` lists each with its licence, including that the SDK has no licence file yet
-and its author intends MIT. No game, BIOS or ROM is distributed.
+It is made for the Ultimate Vectrex Multicart 2 by Jason Kopp (Arcade Jason), and builds on its firmware by Ralf Kornmann
+(not included: the menu reads what it needs from the cartridge), on Dani Ferrer's ([tullulah](https://github.com/tullulah))
+UVMC2 SDK, used as a submodule, and on FatFs (ChaN), the Raspberry Pi pico-sdk and TinyUSB. `THIRD_PARTY_NOTICES.md` lists
+each with its licence, including that the SDK has no licence file yet and its author intends MIT. No game, BIOS or ROM is
+distributed.
