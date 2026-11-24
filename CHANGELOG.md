@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.0
+## 1.1.0
 
 - **NEW**, a top-level entry in `menu.default.ini`: the newest 10 game files on the card by the dates the card holds for them,
   wherever they are and whether or not an `.ini` file lists them, newest first. 4 starts a file, 3 marks a favorite, and 2
