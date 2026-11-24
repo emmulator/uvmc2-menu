@@ -916,7 +916,7 @@ static void dump_node(const MtTree *t, const NmRecs *r, int dir, int depth)
 /* The menu from the shipped file plus the layers test_tree and test_layers use, as the menu shows it. */
 /* Taken from the code before the compact records; BROWSE SD CARD since moved to its place by title,
  * FIRMWARE INFO since renamed DIAGNOSTICS,
- * FAVORITES since sorted by title. */
+ * FAVORITES since sorted by title, NEW since added. */
 static const char EXPECTED_TREE[] =
 "ALL GAMES/\n"
 "  DEMON  <- PORTS/UM2/demon.um2\n"
@@ -926,6 +926,10 @@ static const char EXPECTED_TREE[] =
 "   : UM2, BIN AND VEC FILES IN IT.\n"
 "FAVORITES/\n"
 "  MHAVOC  <- mhavoc.um2\n"
+"NEW  <- @new\n"
+"   : THE NEWEST GAME FILES ON THE CARD, BY\n"
+"   : THEIR FILE DATES: 10 UNLESS MENU/\n"
+"   : SETTINGS.INI SAYS NEW = 5 (UP TO 20).\n"
 "TWO PLAYERS/\n"
 "  MHAVOC  <- mhavoc.um2\n"
 "SYSTEM/\n"

@@ -67,6 +67,8 @@ typedef struct
  * or off (0): on, yes, 1 / off, no, 0. dflt if the key is missing or the value is none of these. */
 #define MT_SETTINGS "settings.ini"
 int mt_setting_on(const char *text, const char *key, int dflt);
+/* The whole number after key = in a settings text, or dflt if the key is missing or not a number. */
+int mt_setting_int(const char *text, const char *key, int dflt);
 /* text with key's value changed to value, the rest (comments, other lines) kept; a missing key is added at the end.
  * Returns the length written to out, or -1 if it does not fit in max. */
 int mt_setting_set(const char *text, const char *key, const char *value, char *out, int max);
@@ -85,6 +87,8 @@ void mt_add(MtTree *t, const char *cat, const char *also, const char *title, con
  * with folder = @fw (and image = @fw) gives those. Returns 0 if it is hidden. */
 int  mt_add_builtin(MtTree *t, NmRecs *r, const char *fwcat, const char *name, const char *image);
 void mt_build(MtTree *t, NmRecs *r, const MtCard *c);   /* node 0 is the root */
+/* 1 if a menu file hides this card file on purpose: a file = section with hide = 1, or an entry for it with hide = 1. */
+int mt_file_hidden(NmRecs *r, const char *path);
 /* 1 if the menu's ini files map the card file at path ("sub/x.bin", "x.um2"): an entry with this image (hidden or not), a
  * file = section that hides it (hiding is a decision about it), or a folder rule for its folder that takes its extension.
  * A file = section that only moves or renames it lists nothing without a rule behind it, so it does not map. A favorite is a

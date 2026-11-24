@@ -19,7 +19,7 @@ touched, so the menu cannot brick the cartridge. Renaming `autostart.um2` on a P
 
 Contents: [Demonstration](#demonstration) · [Install](#install) · [First start on a new card](#first-start-on-a-new-card) ·
 [Using the menu](#using-the-menu) · [Making the menu yours](#making-the-menu-yours) · [BROWSE SD CARD](#browse-sd-card) ·
-[SYSTEM](#system) · [Built-in games, high scores and saves](#built-in-games-high-scores-and-saves) · [Limits](#limits) ·
+[NEW](#new) · [SYSTEM](#system) · [Built-in games, high scores and saves](#built-in-games-high-scores-and-saves) · [Limits](#limits) ·
 [How it works](#how-it-works) · [Build from source](#build-from-source) · [Licence and credits](#licence-and-credits)
 
 ## Demonstration
@@ -60,10 +60,10 @@ A card with only the files above has no `menu/menu.ini`, no favorites and no cal
    Kornmann* and *Custom Menu* with this menu's version, *John Emmer*. It shows once per power-on, not each time you come back from a game.
 2. **The top level.** The menu lists the cartridge's built-in games, found in the cartridge's flash, in the same folders
    the firmware's own menu uses, and puts any that the firmware does not categorize in HOMEBREW. On firmware 1.1.13a, a
-   fresh card shows these 15 entries (the menu draws them in capitals), sorted by title with SYSTEM last:
+   fresh card shows these 16 entries (the menu draws them in capitals), sorted by title with SYSTEM last:
 
-       3D Imager, BCG, BROWSE SD CARD, Demos, HOMEBREW, Infinite Lives, Lightpen, MineStorm, Music, Original, Spinner,
-       Tools, Video, Xmas, SYSTEM
+       3D Imager, BCG, BROWSE SD CARD, Demos, HOMEBREW, Infinite Lives, Lightpen, MineStorm, Music, NEW, Original,
+       Spinner, Tools, Video, Xmas, SYSTEM
 
    Most built-ins carry their category in the firmware's game list. Nineteen do not, though the firmware's menu shows them
    in a folder, so `menu.default.ini` puts those in the same folders (Original, Tools, Music, Xmas, Demos, Spinner and
@@ -298,6 +298,26 @@ files in it (any case); other files are left out. Stick up and down moves, 4 or 
 
 Apart from `menu/favorites.ini`, the browser only reads the card and never changes or deletes a game.
 
+## NEW
+
+NEW, at the top level, lists the newest game files on the card: the 10 `.um2`, `.bin` and `.vec` files with the latest
+dates, newest first, wherever they are, whether or not your `.ini` files list them. It works like BROWSE: 4 starts a file,
+1 goes back, 3 marks a favorite, and 2 switches between all the newest files and only the newest **unmapped** ones, the
+files no entry, hiding section or folder rule covers (see [Finding what is not mapped](#finding-what-is-not-mapped)). The
+unmapped view is the newest of those, not the unmapped ones among the newest, so it fills up to the count when it can. It
+starts on all files each time NEW is opened. Each row shows the file's name, and the whole path shows under the list.
+
+- **The dates are the ones the card holds for each file**, as set by the computer that copied it. The cartridge has no clock,
+  so NEW cannot say "added in the last week"; it shows whichever files are newest. A computer that keeps the original date
+  when it copies (Windows Explorer does) makes a file look as old as its source. Copying from Linux sets the copy time.
+- **The count** is 10. To change it, put `new = 5` (1 to 20) in `menu/settings.ini`.
+- **Left out:** the menu's own files (`autostart.um2`, `MENU.um2`, everything in `menu/` and `config/`), files that a
+  `.ini` file hides with `hide = 1`, names starting with `.`, hidden and system files, and folders more than 5 levels deep.
+  On a card with more than 6000 files it stops early and says so.
+- **To remove it from your menu**, hide it: `[NEW]` with `hide = 1` in your `menu.ini`. It is an entry in
+  `menu.default.ini`, so you can also move it with `category =` or rename it with `title =`.
+- Opening it reads every folder of the card, so it takes a moment on a card with many files.
+
 ## SYSTEM
 
 | entry | does |
@@ -354,6 +374,7 @@ game's save, which the firmware keeps in its own flash, is not kept by this menu
 - Up to 1024 ini sections, 32 `.ini` files besides the default and `menu.ini`, and about 32 KB per file. Beyond that shows
   MENU TOO LONG, or the rest of a file is ignored.
 - Up to 256 built-in games. A firmware with more shows SOME BUILT-IN GAMES NOT LISTED.
+- NEW looks at up to 6000 files, in folders up to 5 levels deep, and shows at most 20.
 - About 250 favorites: the menu keeps their paths in 8 KB of memory, and the file may be up to 16 KB; the menu says
   FAVORITES FILE TOO BIG when it is full.
 - A built-in flash game's save is not kept.
@@ -477,7 +498,7 @@ is set in one place, the `VERSION` file; `make dist` refuses to build if `CHANGE
 
 | path | what |
 |---|---|
-| `src/` | the menu (`main.c` is the device program; the rest is host-testable) |
+| `src/` | the menu (`main.c` is the device program; the rest is host-testable, including `newlist.c`, NEW's walk) |
 | `src/pitrex/` | the ini parser (the folder keeps the name of the project it was first written for) |
 | `transfer/`, `transfer.mk` | TRANSFER MODE's program |
 | `card/menu/menu.default.ini` | the shipped menu definition |

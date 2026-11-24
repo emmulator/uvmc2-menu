@@ -5,6 +5,7 @@
 #include <string.h>
 #include "menu_tree.h"
 #include "browse.h"
+#include "newlist.h"
 #include "um2.h"
 #include "launch.h"
 #include "font.h"
@@ -46,6 +47,7 @@ _Static_assert(sizeof s_menu >= CARTSTREAM_ARENA_MIN, "a streamed cartridge need
 static MtNav s_nav;
 static MtFavs s_favs;
 static char s_text[32768];
+static FATFS s_fatfs;             /* the one work area for mounting the card through FatFs (autostart header, NEW's walk) */
 static BrList s_br;
 static int s_browsing;
 static char s_br_file[BR_PATH];
@@ -181,10 +183,9 @@ static int settings_turn_on(void)
  * bytes and keeps the rest of the sector. The SDK mounts the card afresh on each call, so mounting here is safe. */
 static int autostart_write_head(const unsigned char *h, unsigned n)
 {
-  static FATFS fs;
   FIL f;
   UINT put = 0;
-  if (f_mount(&fs, "", 1) != FR_OK) return 0;
+  if (f_mount(&s_fatfs, "", 1) != FR_OK) return 0;
   int ok = f_open(&f, SELF, FA_WRITE | FA_OPEN_EXISTING) == FR_OK;
   if (ok)
   {
@@ -309,12 +310,64 @@ static void load_step(void)
 
 /* Fill the browser from a folder. The names go in s_text, which is free while browsing, but a load overwrites it, so
  * this is called again after one. On failure the list stays as it was. */
+static NwList s_nw;               /* NEW: the newest files on the card; s_br shows it while s_new */
+static int s_new, s_new_partial;   /* in NEW (inside s_browsing); the walk stopped before the whole card was read */
+static int s_new_unmapped;         /* NEW shows only the files no menu entry, hiding section or folder rule covers (button 2) */
 static int s_br_unmapped;          /* BROWSE SD CARD shows only the files no menu folder lists (button 2) */
 static int br_unmapped(const BrList *b, int i, void *u)
 {
   char path[BR_PATH];
   (void) u;
   return !br_child_path(b, i, path, sizeof path) || !mt_file_mapped(&s_recs, path);
+}
+
+/* NEW: the newest game files on the card by FAT date (newlist.c does the walking; this is the card side of it: FatFs, one open
+ * directory per depth). NEW_VISIT stops the walk on a card with a huge number of files. */
+#define NEW_VISIT 6000
+static DIR s_wdir[NW_DEPTH];
+static FILINFO s_wfi;
+static int new_open_dir(int depth, const char *path, void *u) { (void) u; return f_opendir(&s_wdir[depth], path) == FR_OK; }
+static int new_read_dir(int depth, NwEntry *e, void *u)
+{
+  (void) u;
+  if (f_readdir(&s_wdir[depth], &s_wfi) != FR_OK || s_wfi.fname[0] == 0) return 0;
+  e->name = s_wfi.fname;
+  e->is_dir = (s_wfi.fattrib & AM_DIR) != 0;
+  e->hidden = (s_wfi.fattrib & (AM_HID | AM_SYS)) != 0;
+  e->fdate = s_wfi.fdate;
+  e->ftime = s_wfi.ftime;
+  return 1;
+}
+static void new_close_dir(int depth, void *u) { (void) u; f_closedir(&s_wdir[depth]); }
+static int new_skip(const char *path, void *u)
+{
+  (void) u;
+  return s_new_unmapped ? mt_file_mapped(&s_recs, path) : mt_file_hidden(&s_recs, path);     /* mapped includes hidden */
+}
+
+static void new_scan(void)
+{
+  static const NwFs fs = { new_open_dir, new_read_dir, new_close_dir, new_skip };
+  /* s_text is free here: BROWSE and NEW are not showing, and the list NEW keeps is s_nw's own */
+  uint32_t got = uvm2_sd_read("menu/" MT_SETTINGS, (unsigned char *) s_text, 1023);
+  s_text[got] = 0;
+  nw_start(&s_nw, mt_setting_int(s_text, "new", NW_DEFAULT));
+  s_new_partial = 0;
+  if (f_mount(&s_fatfs, "", 1) != FR_OK) { strcpy(s_error, "CANNOT READ CARD"); return; }
+  int r = nw_walk(&s_nw, &fs, 0, NEW_VISIT);
+  f_mount(0, "", 0);
+  if (r < 0) strcpy(s_error, "CANNOT READ CARD");
+  s_new_partial = r > 0;
+}
+
+static void new_open(void)
+{
+  s_error[0] = 0;
+  s_new_unmapped = 0;
+  new_scan();
+  nw_to_browse(&s_nw, &s_br);
+  s_new = 1;
+  s_browsing = 1;
 }
 
 static void browse_open(const char *path, const char *select)
@@ -464,7 +517,7 @@ static void update(void)
     if (b1 || h < 0)
     {
       s_error[0] = 0;
-      if (s_br.path[0] == 0) s_browsing = 0;
+      if (s_br.path[0] == 0) s_browsing = s_new = 0;
       else
       {
         char parent[BR_PATH], last[BR_PATH];
@@ -493,7 +546,7 @@ static void update(void)
           else
           {
             load_start(s_br_file);
-            if (s_error[0])
+            if (s_error[0] && !s_new)
             {
               /* The load used s_text for the file: list the folder again, keeping its reason on screen. */
               snprintf(err, sizeof err, "%s", s_error);
@@ -503,6 +556,13 @@ static void update(void)
           }
         }
       }
+    }
+    else if (b2 && s_new)
+    {
+      s_new_unmapped = !s_new_unmapped;       /* the list is the newest of what is shown, so it is made again */
+      s_error[0] = 0;
+      new_scan();
+      nw_to_browse(&s_nw, &s_br);
     }
     else if (b2)
     {
@@ -526,9 +586,10 @@ static void update(void)
         if (!br_child_path(&s_br, c, path, sizeof path)) strcpy(s_error, "PATH TOO LONG");
         else
         {
-          br_title(&s_br, c, title, sizeof title);
+          if (s_new) br_title_base(&s_br, c, title, sizeof title);
+          else br_title(&s_br, c, title, sizeof title);
           favorite_toggle(path, title);
-          browse_open(folder, sel);          /* s_error is the toggle's message: opening leaves it alone */
+          if (!s_new) browse_open(folder, sel);          /* s_error is the toggle's message: opening leaves it alone */
         }
       }
     }
@@ -556,7 +617,8 @@ static void update(void)
       if (strcmp(image, "@stock") == 0) go_to_cartridge_menu();
       else if (strcmp(image, "@fwinfo") == 0) { s_info = 1; s_hs_msg = 0; s_hs_count = hs_count(HS_TABLE); }
       else if (strcmp(image, "@calibrate") == 0) s_calibrate = 1;
-      else if (strcmp(image, "@browse") == 0) { s_error[0] = 0; s_br_unmapped = 0; browse_open("", 0); s_browsing = 1; }
+      else if (strcmp(image, "@browse") == 0) { s_error[0] = 0; s_br_unmapped = 0; s_new = 0; browse_open("", 0); s_browsing = 1; }
+      else if (strcmp(image, "@new") == 0) new_open();
       else if (strncmp(image, "@fw:", 4) == 0) start_builtin(atoi(image + 4));
       else if (image[0] == '@') strcpy(s_error, "UNKNOWN ACTION");
       else load_start(image);
@@ -630,9 +692,10 @@ static void browse_draw(void)
 {
   char title[LIST_CH + 1], head[PATH_CH + 1];
   s_size = 8;
-  br_head(s_br.path, head, PATH_CH);
+  if (s_new) strcpy(head, s_new_unmapped ? "NEW: UNMAPPED" : "NEW");
+  else br_head(s_br.path, head, PATH_CH);
   text(LEFT, HEAD_Y, head);
-  if (s_br.n == 0) text(LEFT, LIST_Y, br_empty(&s_br, s_br_unmapped));
+  if (s_br.n == 0) text(LEFT, LIST_Y, s_new ? (s_new_unmapped ? "NOTHING UNMAPPED" : "NO GAME FILES FOUND") : br_empty(&s_br, s_br_unmapped));
   for (int i = 0; i < MT_ROWS && s_br.top + i < s_br.n; i++)
   {
     int id = s_br.top + i;
@@ -644,7 +707,8 @@ static void browse_draw(void)
       char path[BR_PATH];
       fav = br_child_path(&s_br, id, path, sizeof path) && mt_favs_has(&s_favs, path);
     }
-    br_title(&s_br, id, title, folder ? LIST_CH : LIST_CH + 1);
+    if (s_new) br_title_base(&s_br, id, title, LIST_CH + 1);        /* the file's name; the whole path shows under the list */
+    else br_title(&s_br, id, title, folder ? LIST_CH : LIST_CH + 1);
     text_cut(LIST_X, y, title, folder || fav ? LIST_CH - 1 : LIST_CH);
     if (folder) text(MARK_X, y, ">");
     else if (fav) text(MARK_X, y, "'");            /* a favorite file: the mark the tree uses */
@@ -654,7 +718,8 @@ static void browse_draw(void)
   s_size = 4;
   int c = s_br.cursor;
   const int on_file = c >= 0 && c < s_br.n && !s_br.dir[c];
-  if (s_br_unmapped) text_small(LEFT, HINT_Y, on_file ? "4 OPEN  1 BACK  3 FAVORITE  2 SHOW ALL" : "4 OPEN  1 BACK  2 SHOW ALL");
+  if (s_new) text_small(LEFT, HINT_Y, s_new_unmapped ? "4 OPEN  1 BACK  3 FAVORITE  2 SHOW ALL" : "4 OPEN  1 BACK  3 FAVORITE  2 UNMAPPED");
+  else if (s_br_unmapped) text_small(LEFT, HINT_Y, on_file ? "4 OPEN  1 BACK  3 FAVORITE  2 SHOW ALL" : "4 OPEN  1 BACK  2 SHOW ALL");
   else text_small(LEFT, HINT_Y, on_file ? "4 OPEN  1 BACK  3 FAVORITE  2 UNMAPPED" : "4 OPEN  1 BACK  2 UNMAPPED");
   s_size = 5;
   /* the highlighted entry's whole name, where the tree shows an entry's notes: the list cuts long names */
@@ -672,6 +737,7 @@ static void browse_draw(void)
     text_cut(LEFT, MSG_Y, b, NOTE_CH);
   }
   else if (s_error[0]) text_cut(LEFT, MSG_Y, s_error, NOTE_CH);
+  else if (s_new) text_cut(LEFT, MSG_Y, s_new_partial ? "ONLY PART OF THE CARD WAS READ" : s_new_unmapped ? "THE NEWEST UNMAPPED FILES ON THE CARD" : "THE NEWEST FILES BY DATE ON THE CARD", NOTE_CH);
   else
   {
     char b[48];                          /* what the list leaves out, so a folder that looks short or empty explains itself */
@@ -806,7 +872,7 @@ static void draw(void)
     char hint[64];
     const char *im = mt_image(&s_tree, c);
     int game = im[0] != 0 && (im[0] != '@' || strncmp(im, "@fw:", 4) == 0);   /* what button 3 works on */
-    mt_hint(hint, sizeof hint, mt_is_category(&s_tree, c) || !strcmp(im, "@browse"), s_tree.node[s_nav.dir].parent >= 0, game, s_has_more);
+    mt_hint(hint, sizeof hint, mt_is_category(&s_tree, c) || !strcmp(im, "@browse") || !strcmp(im, "@new"), s_tree.node[s_nav.dir].parent >= 0, game, s_has_more);
     s_size = 4;
     text_small(LEFT, HINT_Y, hint);
   }
@@ -819,8 +885,8 @@ static void draw(void)
     int id = mt_nth(&s_tree, s_nav.dir, s_nav.top + i);
     int y = LIST_Y - i * ROW_H;
     if (s_nav.top + i == s_nav.cursor) text(LEFT, y, ">");
-    /* > marks what opens onto more: a folder, and BROWSE SD CARD */
-    int folder = mt_is_category(&s_tree, id) || !strcmp(mt_image(&s_tree, id), "@browse"), fav = s_tree.node[id].fav;
+    /* > marks what opens onto more: a folder, BROWSE SD CARD and NEW */
+    int folder = mt_is_category(&s_tree, id) || !strcmp(mt_image(&s_tree, id), "@browse") || !strcmp(mt_image(&s_tree, id), "@new"), fav = s_tree.node[id].fav;
     text_cut(LIST_X, y, mt_title(&s_tree, id), folder || fav ? LIST_CH - 1 : LIST_CH);
     if (folder) text(MARK_X, y, ">");
     else if (fav) text(MARK_X, y, "'");            /* a favorite: one stroke, in the column folders use for > */

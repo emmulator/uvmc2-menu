@@ -85,10 +85,22 @@ const char *br_name(const BrList *b, int i)
   return b->pool + b->off[i];
 }
 
+static void title_of(const char *s, char *out, int max);
+
 void br_title(const BrList *b, int i, char *out, int max)
 {
+  title_of(br_name(b, i), out, max);
+}
+
+void br_title_base(const BrList *b, int i, char *out, int max)
+{
+  const char *s = br_name(b, i), *slash = strrchr(s, '/');
+  title_of(slash ? slash + 1 : s, out, max);
+}
+
+static void title_of(const char *s, char *out, int max)
+{
   if (max <= 0) return;
-  const char *s = br_name(b, i);
   int k = 0;
   for (; s[k] && k < max - 1; k++)
   {

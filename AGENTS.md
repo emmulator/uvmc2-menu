@@ -16,6 +16,7 @@ the UVMC2 SDK and drawn on the Vectrex. README.md describes the user side; this 
 | `tests/test_menu.c` | host tests for menu_tree and the parser (`CHECK(x)` macro, one `test_*` function per area, called from `main`). |
 | `tools/preview.c` | host dry run: prints the menu a card would get (`make preview CARD=...`). |
 | `src/cart.c`, `cartserve.c`, `cartload.c`, `cartstream.c` | serving a `.bin`: size scheme and bank layout, the core 1 bus loop (scores, flash save), loading from the card, streaming. `docs/bankswitch.md` says what each copies from the firmware. |
+| `src/newlist.c/.h` | NEW: the newest few game files by FAT date, and the card walk (callbacks for the card, so `tests/test_newlist.c` runs it over real folders). The device side is in `main.c` (`new_scan`). |
 | `src/hiscore.c/.h` | the firmware's high-score table in flash (find, save, count); host-tested with a simulated flash. |
 | `tools/` | `hs_dump.py`, `scan_firmware.py`, `gen_card_ini.py`, `gen_catalog.py`, font tools. |
 | `card/menu/menu.default.ini` | the shipped menu file. |
@@ -25,7 +26,7 @@ the UVMC2 SDK and drawn on the Vectrex. README.md describes the user side; this 
 
 ## Build and test
 
-    make test      # host tests (test_menu, test_font, test_cart, test_browse, test_hiscore): each prints "N passed, 0 failed", no warnings
+    make test      # host tests (test_menu, test_font, test_cart, test_browse, test_hiscore, test_newlist): each prints "N passed, 0 failed", no warnings
     make uvm2      # the cartridge build, build_uvm2/uvmc2menu.um2 (a few minutes the first time)
     make transfer  # TRANSFER MODE's program, build_transfer/transfer.um2 (its own build; fetches TinyUSB)
 

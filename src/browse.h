@@ -26,6 +26,8 @@ const char *br_name(const BrList *b, int i);
 /* The display form of entry i: capitals, '_' as a space, any byte outside 32-95 after upper-casing as '?'.
  * Files keep their extension ("ZAPPYBIRD V150.BIN"). */
 void br_title(const BrList *b, int i, char *out, int max);
+/* As br_title, for the last part of a path: entry "games/zeta_game.um2" gives "ZETA GAME.UM2". */
+void br_title_base(const BrList *b, int i, char *out, int max);
 /* The full path of entry i ("PORTS/UM2/x.um2", or "x.bin" in the root) into out. 0 if it does not fit. */
 int  br_child_path(const BrList *b, int i, char *out, int max);
 /* path's parent into out ("A/B" -> "A", "A" -> ""), and the last part (the folder we leave) into last. 0 at root. */

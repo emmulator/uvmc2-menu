@@ -655,6 +655,22 @@ static void norm_dir(const char *in, char *out, int max)
   if (n == 1 && out[0] == '.') out[0] = 0;
 }
 
+int mt_file_hidden(NmRecs *r, const char *path)
+{
+  char key[NM_KEY_LEN], k2[NM_KEY_LEN];
+  nmPathKey(path, key, sizeof key);
+  const NmRec *f = nmFindRec(r, key);
+  if (f && f->kind == NM_REC_FILE && f->hide) return 1;
+  for (int i = 0; i < r->n; i++)
+  {
+    const NmRec *e = &r->rec[i];
+    if (e->kind != NM_REC_ENTRY || !e->hide || nmStr(r, e->image)[0] == '@') continue;
+    nmPathKey(nmStr(r, e->image), k2, sizeof k2);
+    if (strcmp(k2, key) == 0) return 1;
+  }
+  return 0;
+}
+
 int mt_file_mapped(NmRecs *r, const char *path)
 {
   const char *slash = strrchr(path, '/');
@@ -946,6 +962,19 @@ static const char *setting_value(const char *text, const char *key, const char *
     l = end ? end + 1 : 0;
   }
   return 0;
+}
+
+int mt_setting_int(const char *text, const char *key, int dflt)
+{
+  const char *vend = 0, *v = setting_value(text, key, &vend);
+  if (!v || v == vend) return dflt;
+  int n = 0;
+  for (const char *p = v; p < vend; p++)
+  {
+    if (*p < '0' || *p > '9' || n > 100000) return dflt;
+    n = n * 10 + (*p - '0');
+  }
+  return n;
 }
 
 int mt_setting_set(const char *text, const char *key, const char *value, char *out, int max)

@@ -20,7 +20,7 @@ MENU_VERSION := $(strip $(shell cat $(CURDIR)/VERSION))
 MENU_DEFS = -DNM_MAX_RECS=1024 -DNM_POOL=114688 -DNM_KEY_LEN=96
 
 UVM2_NAME    = uvmc2menu
-UVM2_SRCS    = src/main.c src/menu_tree.c src/browse.c src/um2.c src/launch.c src/font.c src/fonttext.c src/fwcat.c src/inflate.c src/hiscore.c src/cartserve.c src/cart.c src/cartload.c src/cartstream.c $(VPY_C_SDK)/vpy.c
+UVM2_SRCS    = src/main.c src/menu_tree.c src/browse.c src/newlist.c src/um2.c src/launch.c src/font.c src/fonttext.c src/fwcat.c src/inflate.c src/hiscore.c src/cartserve.c src/cart.c src/cartload.c src/cartstream.c $(VPY_C_SDK)/vpy.c
 UVM2_CC      = arm-none-eabi-gcc
 UVM2_CXX     = arm-none-eabi-gcc
 UVM2_OBJCOPY = arm-none-eabi-objcopy
@@ -73,6 +73,8 @@ test:
 	build_host/test_browse
 	$(HOSTCC) -std=gnu11 -Wall -Wextra -g -Isrc tests/test_hiscore.c src/hiscore.c -o build_host/test_hiscore
 	build_host/test_hiscore
+	$(HOSTCC) -std=gnu11 -Wall -Wextra -Wno-unused-function -g -Isrc tests/test_newlist.c src/newlist.c src/browse.c src/menu_tree.c -Isrc/pitrex $(MENU_DEFS) -o build_host/test_newlist
+	build_host/test_newlist
 
 # Checks the scanner and inflate against real firmware images: make test-fw FW="a/flash.bin b/flash.bin"
 test-fw:

@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0
+
+- **NEW**, a top-level entry in `menu.default.ini`: the newest 10 game files on the card by the dates the card holds for them,
+  wherever they are and whether or not an `.ini` file lists them, newest first. 4 starts a file, 3 marks a favorite, and 2
+  switches to only the newest *unmapped* files, as in BROWSE. `new = n` in `menu/settings.ini` changes the count (1 to 20).
+  The cartridge has no clock, so NEW shows the newest files; it cannot say how long ago they were added. Hide it with
+  `[NEW]` and `hide = 1` in `menu.ini`.
+- The README now says the menu needs firmware 1.1.12a or later (the first version that looks for `autostart.um2`) and has only
+  been tested on 1.1.13a, and credits Jason Kopp ("Arcade Jason") for the hardware and Ralf Kornmann for the firmware.
+- `examples/settings.ini` shows the `new =` line; `THIRD_PARTY_NOTICES.md` credits the hardware correctly.
+
 ## 1.0.1
 
 - README reorganised and corrected: every built-in game is listed (not only some sizes), the `folder = @fw` rule's `also`
