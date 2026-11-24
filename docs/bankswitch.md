@@ -209,18 +209,26 @@ vector fetch) in `ctx+8`; the poll loop `0x10000584` (every 100 ms, `0x1000061e`
 (2,999,999). The repo already does this. Reads of `$C000-$FFFF` are never served. The contents of the buffer beyond a
 short file are whatever `malloc` returned (not cleared).
 
-## 8. Saving (confirmed; the file save is implemented, the built-in one is not)
+## 8. Saving (confirmed from the code; both are implemented, the built-in one not yet run on a console)
 
 - A 256 KB .bin (`0x10000b28`) re-opens the file for writing (`f_open` flag 2), computes a CRC per 4 KB page of the
   192 KB image (48 pages), and every 100 ms writes any changed page back to the file at
   `block * 64 KB + chunk * 16 KB + page * 4 KB` (`0x10000be0-0x10000bea`, `0x10012954` is `f_write`).
-- A built-in flash game (`0x10000304`) keeps its save page (the byte before its packed data) in a 4 KB page of the
-  firmware's own flash (`0x14000000 + ...`) and copies the page in and out.
+- A built-in flash game (`0x10000304`, called for a 192 KB game with the game's data pointer and CRC-32): the byte before
+  its zlib stream is its save page number (4 KB units of the image; 35 for `VectorbladeV1.13`, checked in the 1.1.13a dump).
+  `0x10000250` finds the game's CRC-32 in a directory of 32 entries of 8 bytes (the key, little-endian, and 0xFF) at flash
+  offset `0xFFFF00` (read through `0x14000000`, the uncached alias) and returns its index, claiming the first free entry
+  (key `0xFFFFFFFF`) by programming the page if the game has none; **inferred** from the loop: a full directory returns -1, which
+  the caller turns into offset `0xFF7000`, the high-score table. The game's save page lives at flash offset `0xFF6000 - 0x1000 *
+  index`. When the game starts the firmware copies that page over the image's save page (unless it was just claimed), makes a
+  shadow copy, and every 100 ms compares the image page with the shadow; once it has held still for a round it compares each word
+  with the flash, erases the sector only if a bit has to go from 0 to 1, and programs the 256-byte pieces that differ.
+  A fresh 1.1.13a dump has an empty directory and blank save pages.
 
 ## What the repo implements
 
 Plain (already), PB6, flash with its program and autoselect commands (the 64 KB and 256 KB file layouts and the two
 built-in forms above), and stream (files and built-ins; the player is found in flash by `fw_stream_player`, built-ins
-are unpacked as they play by `zinflate_stream` with a 32 KB window). The 256 KB file save (cartserve.c `watch_flash`, cartload.c `save_page`; the image order is the firmware's, so `cart_flash_file_offset` is its arithmetic). Not implemented: a built-in flash game's save, sector erase (unreachable in the firmware), and 128 KB
+are unpacked as they play by `zinflate_stream` with a 32 KB window). The 256 KB file save (cartserve.c `watch_flash`, cartload.c `save_page`; the image order is the firmware's, so `cart_flash_file_offset` is its arithmetic). The built-in flash game save is `src/bsave.c` (host-tested against a simulated flash) with `cartload.c` `bs_watch`; it claims the directory entry at the first save, not at launch as the firmware does, and does nothing if the directory is full. Not implemented: sector erase (unreachable in the firmware), and 128 KB
 (refused by the firmware; the user's `Telengard_128kFlash.bin` is byte for byte the first two blocks of
 `Telengard_256kFlash.bin`, but nothing in the firmware says how a 128 KB cartridge is wired).

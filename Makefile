@@ -20,7 +20,7 @@ MENU_VERSION := $(strip $(shell cat $(CURDIR)/VERSION))
 MENU_DEFS = -DNM_MAX_RECS=1024 -DNM_POOL=114688 -DNM_KEY_LEN=96
 
 UVM2_NAME    = uvmc2menu
-UVM2_SRCS    = src/main.c src/menu_tree.c src/browse.c src/newlist.c src/um2.c src/launch.c src/font.c src/fonttext.c src/fwcat.c src/inflate.c src/hiscore.c src/cartserve.c src/cart.c src/cartload.c src/cartstream.c $(VPY_C_SDK)/vpy.c
+UVM2_SRCS    = src/main.c src/menu_tree.c src/browse.c src/newlist.c src/um2.c src/launch.c src/font.c src/fonttext.c src/fwcat.c src/inflate.c src/hiscore.c src/cartserve.c src/bsave.c src/cart.c src/cartload.c src/cartstream.c $(VPY_C_SDK)/vpy.c
 UVM2_CC      = arm-none-eabi-gcc
 UVM2_CXX     = arm-none-eabi-gcc
 UVM2_OBJCOPY = arm-none-eabi-objcopy
@@ -75,12 +75,18 @@ test:
 	build_host/test_hiscore
 	$(HOSTCC) -std=gnu11 -Wall -Wextra -Wno-unused-function -g -Isrc tests/test_newlist.c src/newlist.c src/browse.c src/menu_tree.c -Isrc/pitrex $(MENU_DEFS) -o build_host/test_newlist
 	build_host/test_newlist
+	$(HOSTCC) -std=gnu11 -Wall -Wextra -g -Isrc tests/test_bsave.c src/bsave.c -o build_host/test_bsave
+	build_host/test_bsave
+	$(HOSTCC) -std=gnu11 -Wall -Wextra -g -Isrc tests/test_fwsave.c src/fwcat.c src/bsave.c src/cart.c src/inflate.c -o build_host/test_fwsave
+	build_host/test_fwsave
 
 # Checks the scanner and inflate against real firmware images: make test-fw FW="a/flash.bin b/flash.bin"
 test-fw:
 	mkdir -p build_host
-	$(HOSTCC) -std=gnu11 -O2 -Wall -Wextra -g -Isrc tests/test_fw.c src/fwcat.c src/cart.c src/inflate.c -o build_host/test_fw
+	$(HOSTCC) -std=gnu11 -O2 -Wall -Wextra -g -Isrc tests/test_fw.c src/fwcat.c src/bsave.c src/cart.c src/inflate.c -o build_host/test_fw
 	build_host/test_fw $(FW)
+	$(HOSTCC) -std=gnu11 -Wall -Wextra -g -Isrc tests/test_fwsave.c src/fwcat.c src/bsave.c src/cart.c src/inflate.c -o build_host/test_fwsave
+	build_host/test_fwsave $(FW)
 
 # TRANSFER MODE's program, menu/transfer.um2 on the card (transfer.mk).
 .PHONY: transfer

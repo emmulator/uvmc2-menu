@@ -1,4 +1,5 @@
 #include "fwcat.h"
+#include "bsave.h"
 #include "cart.h"
 #include "inflate.h"
 #include <string.h>
@@ -199,4 +200,40 @@ const uint8_t *fw_stream_player(const uint8_t *flash)
     if (memcmp(p, "g GCE", 5) == 0 && zcrc32(p, CART_STREAM_PLAYER) == CART_STREAM_PLAYER_CRC) return p;
   }
   return 0;
+}
+
+/* ---- are the scores' and saves' places where this firmware has them ---- */
+static int has_bytes(const uint8_t *flash, uint32_t len, const uint8_t *pat, uint32_t n)
+{
+  for (uint32_t i = 0; i + n <= len; i++)
+  {
+    uint32_t k = 0;
+    while (k < n && flash[i + k] == pat[k]) k++;
+    if (k == n) return 1;
+  }
+  return 0;
+}
+
+int fw_saves_ok(const uint8_t *flash, FwSaveCheck *r)
+{
+  /* the literals 0x14FFFF00 and 0x00FFFF00 the save directory's lookup loads (firmware 0x100002fc), and `rsb r3, r0, #4080;
+   * adds r3, #6` that turns a slot into the page 0xFF6000 - slot * 0x1000 (0x10000322) */
+  static const uint8_t dir[8] = { 0x00, 0xFF, 0xFF, 0x14, 0x00, 0xFF, 0xFF, 0x00 };
+  static const uint8_t base[6] = { 0xC0, 0xF5, 0x7F, 0x63, 0x06, 0x33 };
+  /* the high-score table's address, 0xFF7000 in flash, as the firmware's code holds it (cached or not alias) */
+  static const uint8_t hs_a[4] = { 0x00, 0x70, 0xFF, 0x14 }, hs_b[4] = { 0x00, 0x70, 0xFF, 0x10 };
+  FwSaveCheck local;
+  if (!r) r = &local;
+  r->dir = has_bytes(flash, 0x4000u, dir, sizeof dir);
+  r->pagebase = has_bytes(flash, 0x4000u, base, sizeof base);
+  r->scores = has_bytes(flash, 0x10000u, hs_a, 4) || has_bytes(flash, 0x10000u, hs_b, 4);
+  r->blank = 1;
+  for (uint32_t n = 0; n < BS_DIR_N && r->blank; n++)
+  {
+    const uint8_t *e = flash + BS_DIR_OFF + n * 8u;
+    if (e[0] != 0xFF || e[1] != 0xFF || e[2] != 0xFF || e[3] != 0xFF) continue;     /* claimed: the game's save is in it */
+    const uint8_t *p = flash + bs_page_offset((int) n);
+    for (uint32_t i = 0; i < BS_PAGE; i++) if (p[i] != 0xFF) { r->blank = 0; break; }
+  }
+  return r->dir && r->pagebase && r->scores && r->blank;
 }

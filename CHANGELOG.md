@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.1.1
+
+- **Vectorblade and Telengard keep their saves** when started from this menu. They are the two built-in games that program a
+  4 KB page of their own image (options, calibration, scores). The menu now copies the page in from the firmware's own flash
+  before the game starts and writes it back once it has held still, in the same place and format the firmware uses, so a
+  save made from either menu loads from the other. Before this, Vectorblade started on its calibration screen every time and
+  forgot everything. If the firmware's 32 save slots are all taken by other games nothing is kept, and the game still runs.
+- **A check at start-up that the firmware keeps scores and saves where this menu writes them.** The addresses are fixed ones read
+  from firmware 1.1.9a to 1.1.13a (the same in all four). The menu now looks for the firmware's own use of them (the save
+  directory's address, the save-page arithmetic and the high-score table's address) and that every save slot the directory has
+  not claimed is blank. If any is missing the first menu screen says UNKNOWN FIRMWARE: SCORES+SAVES OFF, DIAGNOSTICS says
+  SAVES OFF, and the menu writes no scores or saves; games still start. A slot is also only claimed if its page is blank.
+- DIAGNOSTICS button 3 also saves the built-in games' save pages and directory to `menu/bsaves.bin`, next to `hiscores.bin`.
+- **Changed, to match the firmware:** the menu used to watch the BIOS high-score slot for the 192 KB built-ins (Vectorblade and
+  Telengard) and keep a score in the firmware's table, which the firmware itself does not do for them. It no longer does: these two
+  games keep their scores in their save page, as the firmware has them do.
+
 ## 1.1.0
 
 - **NEW**, a top-level entry in `menu.default.ini`: the newest 10 game files on the card by the dates the card holds for them,

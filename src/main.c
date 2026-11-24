@@ -27,6 +27,7 @@
 #include "ff.h"
 #include "pico/multicore.h"
 #include "hardware/flash.h"
+#include "bsave.h"
 
 extern int uvm2_psram_ready;
 
@@ -53,6 +54,7 @@ static int s_browsing;
 static char s_br_file[BR_PATH];
 static char s_launched_as[64];
 static char s_banner[40];
+static int s_saves_ok = 1;          /* fw_saves_ok: the flash places for scores and saves are the firmware's; off = no flash writes */
 static char s_error[40];
 static FwCat s_fw;
 static uint32_t s_scan_ms, s_build_ms;
@@ -82,6 +84,7 @@ static void restore_score(uint32_t key)
   uint8_t score[7];
   s_score_key = key;
   cart_set_score(0);
+  if (!s_saves_ok) return;                 /* the table may not be where this menu reads it: neither restore nor keep scores */
   int found = hs_find(HS_TABLE, key, score);
   /* The firmware's record for a game that writes only the six digits (E-SRG) has blank flash, 0xFF, where the BIOS keeps
    * its $80 terminator: restore it as $80. */
@@ -598,7 +601,11 @@ static void update(void)
   if (s_info && b3)
   {
     /* The firmware's whole score table, for tools/hs_dump.py to match its keys to games on a PC. */
-    s_hs_msg = uvm2_sd_write("menu/hiscores.bin", (const unsigned char *) HS_TABLE, HS_BYTES) == 1 ? "SAVED MENU/HISCORES.BIN" : "COULD NOT SAVE";
+    int ok = uvm2_sd_write("menu/hiscores.bin", (const unsigned char *) HS_TABLE, HS_BYTES) == 1;
+    /* and the built-in games' saves (bsave.h): the 256-byte directory, then the 32 save pages, the last one first */
+    ok = ok && uvm2_sd_write2("menu/bsaves.bin", FLASH_NOCACHE + BS_DIR_OFF, BS_SUBPAGE,
+                              FLASH_NOCACHE + BS_PAGE0 - (BS_DIR_N - 1u) * BS_PAGE, BS_DIR_N * BS_PAGE) == 1;
+    s_hs_msg = ok ? "SAVED HISCORES.BIN, BSAVES.BIN" : "COULD NOT SAVE";
     return;
   }
   if (s_notes || s_info) { if (b1 || b2 || b4 || h) s_notes = s_info = 0; return; }
@@ -828,6 +835,7 @@ static void draw(void)
     snprintf(b, sizeof b, "SECTIONS %d / %d", s_recs.n, NM_MAX_RECS); text(LEFT, y, b);
     y -= INFO_ROW;
     if (s_hs_msg) snprintf(b, sizeof b, "%s", s_hs_msg);
+    else if (!s_saves_ok) snprintf(b, sizeof b, "SAVES OFF: UNKNOWN FIRMWARE");
     else snprintf(b, sizeof b, "HIGH SCORES %d/%d 3=SAVE", s_hs_count, (int) (HS_BYTES / HS_REC));
     text(LEFT, y, b);
     y -= INFO_ROW;
@@ -934,7 +942,8 @@ static void build_menu(void)
   s_fw_shown = s_fw_hidden = s_fw_unsupported = 0;
   static const MtCard card = { card_exists, card_list, add_builtins, 0, &s_favs };
   mt_build(&s_tree, &s_recs, &card);
-  if (s_recs.dropped || s_tree.dropped) strcpy(s_banner, "MENU TOO LONG");
+  if (!s_saves_ok) strcpy(s_banner, "UNKNOWN FIRMWARE: SCORES+SAVES OFF");
+  else if (s_recs.dropped || s_tree.dropped) strcpy(s_banner, "MENU TOO LONG");
   else if (s_fw.cut_off) strcpy(s_banner, "SOME BUILT-IN GAMES NOT LISTED");
   s_build_ms = (time_us_32() - t0) / 1000u;
 }
@@ -1011,6 +1020,8 @@ static void setup(void)
       strcpy(s_banner, settings_turn_on() && (!card_exists(SELF, 0) || autostart_set_off(0)) ? "MENU IS ON AGAIN" : "COULD NOT SWITCH ON");
     uint32_t t0 = time_us_32();
     fw_scan(&s_fw, FLASH_NOCACHE);
+    s_saves_ok = fw_saves_ok(FLASH_NOCACHE, 0);
+    cartload_allow_saves(s_saves_ok);
     s_scan_ms = (time_us_32() - t0) / 1000u;
     build_menu();
   }

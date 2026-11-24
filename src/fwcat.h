@@ -27,6 +27,15 @@ const uint8_t *fw_game_data(const FwCat *c, int i); /* its zlib stream (after th
 uint32_t fw_game_packed(const FwCat *c, int i);     /* the length of that */
 int fw_can_serve(const FwCat *c, int i);            /* 1 if cart.c has a scheme for its size (32 KB or less, 64 KB, 192 KB, stream) */
 
+/* Whether the places in flash where this menu keeps scores and saves are where this firmware keeps them (bsave.h, hiscore.h).
+ * They are fixed addresses read from firmware 1.1.9a to 1.1.13a, which were the same in all four, so a firmware that moved
+ * them would be written over without a word. The check looks for the signs that the firmware's own code still uses them: the
+ * save directory's address and the instruction that works out a game's save page, near the start of the image, and the
+ * high-score table's address in its first 64 KB; and that every save slot the directory has not claimed is blank. It reads
+ * only; the menu keeps its flash writes off when it fails. Each field is 1 if that sign is there. */
+typedef struct { int dir, pagebase, scores, blank; } FwSaveCheck;
+int fw_saves_ok(const uint8_t *flash, FwSaveCheck *r);   /* 1 if all four are */
+
 /* The video player the firmware streams its videos through (VIDE's ExtremePlayer: "VIDEOPLAYER" in its header,
  * CART_STREAM_PLAYER bytes, checked by CRC-32). 0 if this firmware has none. */
 const uint8_t *fw_stream_player(const uint8_t *flash);

@@ -9,6 +9,9 @@ const char *cartload_file(const char *path, const uint8_t *player, uint8_t *aren
 /* Called with a game's score key before it is served: the CRC-32 the firmware keys its high-score table on, for a 64 KB
  * file or a 64 KB / 192 KB built-in. 0: not called. The 256 KB and streamed files have no score in the firmware. */
 void cartload_on_key(void (*f)(uint32_t key));
+/* Whether the menu may write the flash for a built-in game's save (fw_saves_ok says the firmware keeps them where this
+ * menu does). Off until main.c turns it on. */
+void cartload_allow_saves(int on);
 /* A built-in game of 64 KB or 192 KB: its zlib stream, the unpacked size and CRC-32 from the firmware's list. */
 const char *cartload_builtin(const uint8_t *packed, uint32_t packed_bytes, uint32_t size, uint32_t crc,
                              uint8_t *arena, uint32_t arena_bytes);

@@ -342,7 +342,7 @@ table (about 9 MB on a 64 GB card). The small lines on its screen are there to b
 **DIAGNOSTICS** shows what the menu found in flash (`GAMES n`) and how long that took. `MENU BUILD n MS` is how long it took
 to read the ini files and build the menu. `SECTIONS n / 1024` is how many ini sections it holds, against the limit.
 `HIGH SCORES n / 2048` is how many records the firmware's score table holds; button 3 on that page saves the whole table to
-`menu/hiscores.bin`, and `python3 tools/hs_dump.py <card>/menu/hiscores.bin --card <card>` says which game each record is
+`menu/hiscores.bin` (and the built-in games' save pages and directory to `menu/bsaves.bin`), and `python3 tools/hs_dump.py <card>/menu/hiscores.bin --card <card>` says which game each record is
 for and whether it is a score.
 
 ## Built-in games, high scores and saves
@@ -361,7 +361,9 @@ than games you have a score in; `tools/hs_dump.py` labels each one.
 **Saves.** A 256 KB game can program its flash chip, and the menu keeps what it writes, as the firmware does: about every
 100 ms it writes each changed 4 KB page back into the game's own `.bin` on the card (so that file stops being a pristine
 copy: keep a backup if you want one). Telengard's characters work this way, and load from either menu. A built-in flash
-game's save, which the firmware keeps in its own flash, is not kept by this menu.
+game's save (Vectorblade, Telengard's built-in) is kept in the firmware's own flash, where the firmware keeps it: one 4 KB
+page of the game's image, copied in before it starts and written back once it has held still, so a save made from either menu
+loads from the other. The firmware has 32 save slots, one per game; when they are all taken nothing is kept.
 
 ## Limits
 
@@ -377,11 +379,15 @@ game's save, which the firmware keeps in its own flash, is not kept by this menu
 - NEW looks at up to 6000 files, in folders up to 5 levels deep, and shows at most 20.
 - About 250 favorites: the menu keeps their paths in 8 KB of memory, and the file may be up to 16 KB; the menu says
   FAVORITES FILE TOO BIG when it is full.
-- A built-in flash game's save is not kept.
 - Firmware 1.1.12a is the oldest the menu can start on, because it is the first with `autostart.um2` (the file names are in
   its image; its code was not traced). Everything else the menu does with the firmware (its game list, high-score table,
   video player and launching rules) was read from 1.1.13a, and only that version has been tested on a console. The
   game-list scan also reads 1.1.9a to 1.1.13a.
+- The high-score table and the built-in games' saves are at fixed places in the cartridge's flash, the same in firmware 1.1.9a
+  to 1.1.13a. At start-up the menu checks that the firmware's own code still uses those places and that its unused save slots
+  are blank. If not, the first menu screen says UNKNOWN FIRMWARE: SCORES+SAVES OFF, DIAGNOSTICS says SAVES OFF, and the menu
+  writes no scores or saves, so that it cannot write over something else; games still start. (A firmware that kept those signs
+  but moved the data would not be caught.)
 - With USB connected the cartridge keeps running when the console is switched off; unplug USB to test a power cycle.
 
 ## How it works
