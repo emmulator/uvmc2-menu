@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.2
+
+- **Fixed: two folder rules for one folder replaced each other.** The later rule overwrote the earlier, so `files = bin vec`
+  into HOMEBREW and `files = um2` into UVMC2 for the card's root could not both stand: only the last was listed, and games
+  placed by a file section in the files the first rule had listed (ATARI ST's Llamatron, say) silently vanished from the menu.
+  Now a rule that names other kinds of file than an earlier rule for that folder is a rule of its own; one that names a kind
+  the earlier rule already names still replaces it, as before. The README and `examples/menu.ini` show the split.
+
 ## 1.1.1
 
 - **Vectorblade and Telengard keep their saves** when started from this menu. They are the two built-in games that program a

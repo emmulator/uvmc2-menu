@@ -124,6 +124,8 @@ static NmRec *nmFindRec(NmRecs *r, const char *key)
   return 0;
 }
 
+static void nmFolderKey(const NmRecs *r, const char *path, const char *files, char *out, int max);
+
 // The first record that came from a section with this name (not counting categories), or 0.
 static const NmRec *nmFindRecByName(NmRecs *r, const char *name)
 {
@@ -224,7 +226,7 @@ static void nmEndSection(NmRecs *r, NmSection *sec, const char *stem)
   else if (sec->isFolder && st->image[0] != 0)
   {
     kind = NM_REC_FOLDER;
-    nmSlugKey("f.", sec->path, key, NM_KEY_LEN);
+    nmFolderKey(r, sec->path, sec->files, key, NM_KEY_LEN);
   }
   else if (sec->isFolder)
   {
@@ -382,6 +384,43 @@ static int nmExtOk(const char *name, const char *list)
   }
   return 0;
 }
+
+// Do two "files" lists share an extension ("um2 bin vec" and "bin vec" do; "um2" and "bin vec" do not)? Empty = any.
+static int nmFilesOverlap(const char *a, const char *b)
+{
+  if (a[0] == 0 || b[0] == 0) return 1;
+  for (const char *p = a; *p != 0;)
+  {
+    while (*p == ' ' || *p == ',' || *p == '.') p++;
+    char probe[40] = "x.";
+    int n = 2;
+    while (*p != 0 && *p != ' ' && *p != ',') { if (n < 38) probe[n++] = *p; p++; }
+    probe[n] = 0;
+    if (n > 2 && nmExtOk(probe, b)) return 1;
+  }
+  return 0;
+}
+
+// The key of a folder rule: "f." + folder. A later rule for the same folder replaces an earlier one when their file
+// types overlap (a card's rule overrides the catalogue's); a rule for other types of that folder is a rule of its own.
+static void nmFolderKey(const NmRecs *r, const char *path, const char *files, char *out, int max)
+{
+  char base[NM_KEY_LEN];
+  nmSlugKey("f.", path, base, NM_KEY_LEN);
+  int bl = (int) strlen(base);
+  if (bl > max - 5) bl = max - 5;
+  for (int n = 0; n < 20; n++)
+  {
+    memcpy(out, base, (size_t) bl);
+    int k = bl;
+    if (n > 0) { out[k++] = '.'; if (n > 9) out[k++] = (char) ('0' + n / 10); out[k++] = (char) ('0' + n % 10); }
+    out[k] = 0;
+    const NmRec *e = nmFindRec((NmRecs *) r, out);
+    if (e == 0 || e->kind != NM_REC_FOLDER) return;
+    if (nmFilesOverlap(nmStr(r, e->files), files)) return;
+  }
+}
+
 
 // A Vectrex cartridge starts with "g GCE" (what the Vectrex BIOS checks at power-on).
 static int nmIsCartridge(const unsigned char *head, int n)

@@ -150,7 +150,16 @@ games in a subfolder needs a rule of its own. A new game copied into that folder
     [CARD FILES]
     category = HOMEBREW
     folder   = .
-    files    = um2 bin vec
+    files    = bin vec
+
+    [UM2 FILES]
+    category = UVMC2
+    folder   = .
+    files    = um2
+
+One folder can have a rule for each kind of file, each with its own category, as above: native Vectrex games into HOMEBREW and
+`.um2` programs into UVMC2. A later rule that names a kind of file an earlier rule for that folder already names replaces
+that rule (that is how your `menu.ini` overrides a `catalog.ini`); one that names only other kinds is a rule of its own.
 
 **An entry** lists a single file, wherever it is, with no folder rule. Use it for one game in a folder you do not want
 listed as a whole. `needs = path` hides the entry unless that other file (a ROM set, say) is on the card too.

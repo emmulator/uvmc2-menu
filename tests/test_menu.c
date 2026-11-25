@@ -1090,9 +1090,10 @@ static void test_example_ini(void)
   a[n] = 0;
   memset(&recs, 0, sizeof recs);
   nmParseMenuText(&recs, a, "menu");
-  CHECK(recs.n == 16 && recs.dropped == 0);                         /* its 16 sections */
+  CHECK(recs.n == 17 && recs.dropped == 0);                         /* its 17 sections */
   /* the sections its numbered parts promise: a root rule, a PORTS rule, a hiding section and a one-file entry */
-  CHECK(mt_file_mapped(&recs, "anything.um2") == 1);                 /* part 1: the root rule takes um2 */
+  CHECK(mt_file_mapped(&recs, "anything.um2") == 1);                 /* part 1: the root rules take um2, bin and vec */
+  CHECK(mt_file_mapped(&recs, "anything.bin") == 1 && mt_file_mapped(&recs, "anything.vec") == 1);
   CHECK(mt_file_mapped(&recs, "PORTS/UM2/enduro.um2") == 1);
   CHECK(mt_file_mapped(&recs, "unlisted.txt") == 0);
   CHECK(mt_file_mapped(&recs, "mhavoc.um2") == 1);                   /* part 3: an entry */
@@ -1117,10 +1118,33 @@ static void test_folder_default_image(void)
   CHECK(recs.n == 1 && recs.rec[0].kind == NM_REC_NOTES);
 }
 
+/* Two folder rules for one folder: a later one replaces an earlier one only if their file types overlap. */
+static void test_folder_rules(void)
+{
+  const char *def = "[CATALOGUED]\nfolder = .\nfiles = bin vec\nimage = {dir}/{file}\ncategory = HOMEBREW\n";
+  /* 1. other types of the same folder are a rule of their own: .bin stays a catalogue's, .um2 goes to UVMC2 */
+  load(def, "[UM2 FILES]\nfolder = .\nfiles = um2\nimage = {dir}/{file}\ncategory = UVMC2\n");
+  int hb = find(0, "HOMEBREW"), uv = find(0, "UVMC2");
+  CHECK(hb > 0 && uv > 0);
+  CHECK(find(hb, "ALIENSTORM") > 0 && find(hb, "ZETA GAME") < 0);
+  CHECK(find(uv, "ZETA GAME") > 0 && find(uv, "ALIENSTORM") < 0);
+  CHECK(find(uv, "AUTOSTART") < 0 && find(uv, "MENU") < 0);
+  /* 2. a rule that names the same types replaces the earlier one, as it always did */
+  load(def, "[CARD FILES]\nfolder = .\nfiles = vec bin\nimage = {dir}/{file}\ncategory = MINE\n");
+  CHECK(find(0, "HOMEBREW") < 0 && find(find(0, "MINE"), "ALIENSTORM") > 0);
+  /* 3. a rule with an extra type that overlaps replaces it too, and lists the new type as well */
+  load(def, "[CARD FILES]\nfolder = .\nfiles = um2 bin vec\nimage = {dir}/{file}\ncategory = MINE\n");
+  CHECK(find(0, "HOMEBREW") < 0 && find(find(0, "MINE"), "ALIENSTORM") > 0 && find(find(0, "MINE"), "ZETA GAME") > 0);
+  /* 4. both, in the order the card's menu.ini would have them: the overriding rule first, then one for the rest */
+  load(def, "[CARD FILES]\nfolder = .\nfiles = bin vec\nimage = {dir}/{file}\ncategory = MINE\n[UM2 FILES]\nfolder = .\nfiles = um2\nimage = {dir}/{file}\ncategory = UVMC2\n");
+  CHECK(find(0, "HOMEBREW") < 0 && find(find(0, "MINE"), "ALIENSTORM") > 0 && find(find(0, "UVMC2"), "ZETA GAME") > 0);
+  CHECK(find(find(0, "MINE"), "ZETA GAME") < 0);
+}
+
 int main(void)
 {
   test_compact_records(); test_top_level(); test_capacity(); test_no_all_games(); test_fav_mark(); test_builtins(); test_fav_standalone();
-  test_file_mapped(); test_folder_default_image();
+  test_file_mapped(); test_folder_default_image(); test_folder_rules();
   test_example_ini(); test_favorites(); test_fav_toggle(); test_settings(); test_tree(); test_layers(); test_three_layers(); test_nav(); test_place(); test_scroll_marks(); test_wrap(); test_notes(); test_hint(); test_um2();
   printf("%d passed, %d failed\n", passes, fails);
   return fails != 0;
